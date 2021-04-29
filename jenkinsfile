@@ -2,14 +2,14 @@ pipeline
 {
     agent any
     stages{
-        stage("build"){
+        stage("cloning git"){
             steps{
-                echo "build stage"
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'fd7ffd67-5194-4c87-8a27-d9a0209e550f', url: 'https://github.com/WpavanN/pipeline.git']]])
             }
         }
-        stage("test"){
+        stage("push to bitbucket"){
             steps{
-                echo "build test"
+                echo "push to bitbucket"
             }
         }
         stage("deploy"){
